@@ -1,0 +1,42 @@
+[
+  {
+    "code": "DBS_OCBC_1",
+    "payerAccountNumber": "05461368",
+    "payerBank": "DBSSGB2LXXX",
+    "receiverAccountNumber": "438421",
+    "receiverBank": "OCBCSGSGXXX",
+    "supportingInformation": "BNF:PAY CLIENT"
+  },
+  {
+    "code": "OCBC_DBS_1",
+    "payerAccountNumber": "438421",
+    "payerBank": "OCBCSGSGXXX",
+    "receiverAccountNumber": "05461368",
+    "receiverBank": "DBSSGB2LXXX",
+    "supportingInformation": "BNF:FFC-4697132"
+  },
+  {
+    "code": "OCBC_DBS_2",
+    "payerAccountNumber": "438421",
+    "payerBank": "OCBCSGSGXXX",
+    "receiverAccountNumber": "05461369",
+    "receiverBank": "DBSSSGSGXXX",
+    "supportingInformation": "BNF:FFC-482315"
+  },
+  {
+    "code": "DBS_SCB",
+    "payerAccountNumber": "185586",
+    "payerBank": "DBSSSGSGXXX",
+    "receiverAccountNumber": "1868422",
+    "receiverBank": "SCBLAU2SXXX",
+    "supportingInformation": "RFB:Test payment"
+  },
+  {
+    "code": "CITI_GS",
+    "payerAccountNumber": "00454983",
+    "payerBank": "CITIGB2LXXX",
+    "receiverAccountNumber": "48486414",
+    "receiverBank": "GSCMUS33XXX",
+    "supportingInformation": null
+  }
+]
