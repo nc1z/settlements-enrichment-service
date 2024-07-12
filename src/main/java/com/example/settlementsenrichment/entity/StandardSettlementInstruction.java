@@ -1,5 +1,6 @@
 package com.example.settlementsenrichment.entity;
 
+import com.example.settlementsenrichment.util.ValidationConstants;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -13,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @NoArgsConstructor
 @RequiredArgsConstructor
-@JsonPropertyOrder({ "id", "code", "payerAccountNumber", "payerBank", "receiverAccountNumber", "receiverBank", "supportingInformation" })
+@JsonPropertyOrder({"id", "code", "payerAccountNumber", "payerBank", "receiverAccountNumber", "receiverBank", "supportingInformation"})
 public class StandardSettlementInstruction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +33,7 @@ public class StandardSettlementInstruction {
     @NonNull
     @NotNull(message = "payerBank cannot be null")
     @Column(name = "payer_bank", nullable = false)
-    @Pattern(regexp = "^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", message = "Invalid SWIFT code")
+    @Pattern(regexp = ValidationConstants.SWIFT_CODE_REGEX, message = "Invalid SWIFT code")
     private String payerBank;
 
     @NonNull
@@ -43,7 +44,7 @@ public class StandardSettlementInstruction {
     @NonNull
     @NotNull(message = "receiverBank cannot be null")
     @Column(name = "receiver_bank", nullable = false)
-    @Pattern(regexp = "^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", message = "Invalid SWIFT code")
+    @Pattern(regexp = ValidationConstants.SWIFT_CODE_REGEX, message = "Invalid SWIFT code")
     private String receiverBank;
 
     @Column(name = "supporting_information")
