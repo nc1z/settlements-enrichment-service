@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Party {
     @NotNull(message = "Account number cannot be null")
-    @Pattern(regexp = "^[0-9]+$", message = "Invalid account number")
+    @Pattern(regexp = ValidationConstants.NUMERIC_REGEX, message = "Invalid account number")
     private String accountNumber;
 
     @NotNull(message = "Bank code cannot be null")

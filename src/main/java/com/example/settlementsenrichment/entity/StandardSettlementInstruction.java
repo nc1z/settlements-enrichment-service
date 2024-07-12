@@ -26,23 +26,25 @@ public class StandardSettlementInstruction {
     private String code;
 
     @NonNull
-    @NotNull(message = "payerAccountNumber cannot be null")
+    @NotNull(message = "Payer Account Number cannot be null")
+    @Pattern(regexp = ValidationConstants.NUMERIC_REGEX, message = "Invalid payer account number")
     @Column(name = "payer_account_number", nullable = false)
     private String payerAccountNumber;
 
     @NonNull
-    @NotNull(message = "payerBank cannot be null")
+    @NotNull(message = "Payer Bank cannot be null")
     @Column(name = "payer_bank", nullable = false)
     @Pattern(regexp = ValidationConstants.SWIFT_CODE_REGEX, message = "Invalid SWIFT code")
     private String payerBank;
 
     @NonNull
-    @NotNull(message = "receiverAccountNumber cannot be null")
+    @NotNull(message = "Receiver Account Number cannot be null")
+    @Pattern(regexp = ValidationConstants.NUMERIC_REGEX, message = "Invalid receiver account number")
     @Column(name = "receiver_account_number", nullable = false)
     private String receiverAccountNumber;
 
     @NonNull
-    @NotNull(message = "receiverBank cannot be null")
+    @NotNull(message = "Receiver Bank cannot be null")
     @Column(name = "receiver_bank", nullable = false)
     @Pattern(regexp = ValidationConstants.SWIFT_CODE_REGEX, message = "Invalid SWIFT code")
     private String receiverBank;
