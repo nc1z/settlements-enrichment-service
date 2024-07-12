@@ -5,39 +5,47 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 @RequiredArgsConstructor
 @JsonPropertyOrder({ "id", "code", "payerAccountNumber", "payerBank", "receiverAccountNumber", "receiverBank", "supportingInformation" })
 public class StandardSettlementInstruction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final Long id;
+    private Long id;
 
+    @NonNull
     @NotNull(message = "code cannot be null")
     @Column(name = "code", nullable = false, unique = true)
-    private final String code;
+    private String code;
 
+    @NonNull
     @NotNull(message = "payerAccountNumber cannot be null")
     @Column(name = "payer_account_number", nullable = false)
-    private final String payerAccountNumber;
+    private String payerAccountNumber;
 
+    @NonNull
     @NotNull(message = "payerBank cannot be null")
     @Column(name = "payer_bank", nullable = false)
     @Pattern(regexp = "^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", message = "Invalid SWIFT code")
-    private final String payerBank;
+    private String payerBank;
 
+    @NonNull
     @NotNull(message = "receiverAccountNumber cannot be null")
     @Column(name = "receiver_account_number", nullable = false)
-    private final String receiverAccountNumber;
+    private String receiverAccountNumber;
 
+    @NonNull
     @NotNull(message = "receiverBank cannot be null")
     @Column(name = "receiver_bank", nullable = false)
     @Pattern(regexp = "^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$", message = "Invalid SWIFT code")
-    private final String receiverBank;
+    private String receiverBank;
 
     @Column(name = "supporting_information")
-    private final String supportingInformation;
+    private String supportingInformation;
 }
