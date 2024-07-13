@@ -33,9 +33,16 @@ public class MarketSettlementMessageService {
                 .currency(tradeRequest.currency())
                 .payerParty(new Party(ssi.getPayerAccountNumber(), ssi.getPayerBank()))
                 .receiverParty(new Party(ssi.getReceiverAccountNumber(), ssi.getReceiverBank()))
-                .supportingInformation(ssi.getSupportingInformation())
+                .supportingInformation(transformSupportingInformation(ssi.getSupportingInformation()))
                 .build();
 
         return marketSettlementMessageRepository.save(message);
+    }
+
+    private String transformSupportingInformation(String supportingInformation) {
+        if (supportingInformation == null || supportingInformation.isEmpty()) {
+            return null;
+        }
+        return "/" + supportingInformation.replace(":", "/");
     }
 }
