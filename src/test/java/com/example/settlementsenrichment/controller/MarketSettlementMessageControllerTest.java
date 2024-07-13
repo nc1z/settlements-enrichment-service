@@ -198,6 +198,37 @@ class MarketSettlementMessageControllerTest {
     }
 
     @Test
+    void shouldReturnBadRequestForInvalidCurrency() throws Exception {
+        TradeRequest invalidRequest = TradeRequest.builder()
+                .tradeId("16846550")
+                .code("DBS_SCB")
+                .amount(new BigDecimal("1234.25"))
+                .currency(null) // Invalid currency
+                .valueDate("17032020")
+                .build();
+
+        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(invalidRequest)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors.currency").value("Currency cannot be blank"));
+
+        TradeRequest requestWithInvalidCurrency = TradeRequest.builder()
+                .tradeId("16846550")
+                .code("DBS_SCB")
+                .amount(new BigDecimal("1234.25"))
+                .currency("ABCD") // Invalid currency
+                .valueDate("17032020")
+                .build();
+
+        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(requestWithInvalidCurrency)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errors.currency").value("Currency must be a valid ISO 4217 code"));
+    }
+
+    @Test
     void shouldReturnBadRequestForInvalidDate() throws Exception {
         TradeRequest invalidRequest = TradeRequest.builder()
                 .tradeId("16846550")
