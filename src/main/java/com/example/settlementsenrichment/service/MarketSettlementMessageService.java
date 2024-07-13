@@ -4,6 +4,7 @@ import com.example.settlementsenrichment.dto.TradeRequest;
 import com.example.settlementsenrichment.entity.MarketSettlementMessage;
 import com.example.settlementsenrichment.entity.Party;
 import com.example.settlementsenrichment.entity.StandardSettlementInstruction;
+import com.example.settlementsenrichment.exception.ResourceNotFoundException;
 import com.example.settlementsenrichment.repository.MarketSettlementMessageRepository;
 import com.example.settlementsenrichment.repository.StandardSettlementInstructionRepository;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class MarketSettlementMessageService {
 
     public MarketSettlementMessage createMarketSettlementMessage(TradeRequest tradeRequest) throws Exception {
         StandardSettlementInstruction ssi = standardSettlementInstructionRepository.findByCode(tradeRequest.code())
-                .orElseThrow(() -> new Exception("SSI Code not found: " + tradeRequest.code()));
+                .orElseThrow(() -> new ResourceNotFoundException(tradeRequest.code()));
 
         MarketSettlementMessage message = MarketSettlementMessage.builder()
                 .tradeId(tradeRequest.tradeId())
