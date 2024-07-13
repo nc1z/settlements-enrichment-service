@@ -4,12 +4,14 @@ import com.example.settlementsenrichment.dto.TradeRequest;
 import com.example.settlementsenrichment.entity.MarketSettlementMessage;
 import com.example.settlementsenrichment.entity.Party;
 import com.example.settlementsenrichment.entity.StandardSettlementInstruction;
+import com.example.settlementsenrichment.exception.DuplicateResourceException;
 import com.example.settlementsenrichment.exception.ResourceNotFoundException;
 import com.example.settlementsenrichment.repository.MarketSettlementMessageRepository;
 import com.example.settlementsenrichment.repository.StandardSettlementInstructionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -23,9 +25,14 @@ public class MarketSettlementMessageService {
     }
 
     @Transactional
-    public MarketSettlementMessage createMarketSettlementMessage(TradeRequest tradeRequest) throws Exception {
+    public MarketSettlementMessage createMarketSettlementMessage(TradeRequest tradeRequest) {
+
+        if (findOptionalByTradeId(tradeRequest.tradeId()).isPresent()) {
+            throw new DuplicateResourceException("Market Settlement Message", "TradeId", tradeRequest.tradeId());
+        }
+
         StandardSettlementInstruction ssi = standardSettlementInstructionRepository.findByCode(tradeRequest.code())
-                .orElseThrow(() -> new ResourceNotFoundException(tradeRequest.code()));
+                .orElseThrow(() -> new ResourceNotFoundException("SSI", "code", tradeRequest.code()));
 
         MarketSettlementMessage message = MarketSettlementMessage.builder()
                 .tradeId(tradeRequest.tradeId())
@@ -44,7 +51,12 @@ public class MarketSettlementMessageService {
     @Transactional(readOnly = true)
     public MarketSettlementMessage findById(String tradeId) {
         return marketSettlementMessageRepository.findByTradeId(tradeId)
-                .orElseThrow(() -> new ResourceNotFoundException("MarketSettlementMessage not found with tradeId", tradeId));
+                .orElseThrow(() -> new ResourceNotFoundException("MarketSettlementMessage", "tradeId", tradeId));
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<MarketSettlementMessage> findOptionalByTradeId(String tradeId) {
+        return marketSettlementMessageRepository.findByTradeId(tradeId);
     }
 
     private String transformSupportingInformation(String supportingInformation) {
