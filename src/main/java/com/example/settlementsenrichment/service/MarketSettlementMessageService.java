@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.RoundingMode;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class MarketSettlementMessageService {
@@ -45,8 +44,7 @@ public class MarketSettlementMessageService {
 
         MarketSettlementMessage message = MarketSettlementMessage.builder()
                 .tradeId(tradeRequest.tradeId())
-                .messageId(UUID.randomUUID())
-                .amount(tradeRequest.amount().setScale(2, RoundingMode.HALF_UP))
+                .amount(tradeRequest.amount().setScale(2, RoundingMode.UNNECESSARY))
                 .valueDate(tradeRequest.valueDate())
                 .currency(tradeRequest.currency())
                 .payerParty(new Party(ssi.getPayerAccountNumber(), ssi.getPayerBank()))
