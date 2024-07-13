@@ -59,7 +59,7 @@ public class MarketSettlementMessageService {
     }
 
     @Transactional(readOnly = true)
-    public MarketSettlementMessage findById(String tradeId) {
+    public MarketSettlementMessage findByTradeId(String tradeId) {
         return marketSettlementMessageRepository.findByTradeId(tradeId)
                 .orElseThrow(() -> {
                     logger.error("Market Settlement Message not found for Trade ID: {}", tradeId);

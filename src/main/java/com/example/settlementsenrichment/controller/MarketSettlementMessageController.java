@@ -26,7 +26,7 @@ public class MarketSettlementMessageController {
 
     @GetMapping("/{tradeId}")
     public ResponseEntity<MarketSettlementMessage> getMessageByTradeId(@PathVariable @DigitsOnly(field = "tradeId") String tradeId) {
-        MarketSettlementMessage message = service.findById(tradeId);
+        MarketSettlementMessage message = service.findByTradeId(tradeId);
         return ResponseEntity.ok(message);
     }
 }
