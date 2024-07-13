@@ -41,6 +41,12 @@ public class MarketSettlementMessageService {
         return marketSettlementMessageRepository.save(message);
     }
 
+    @Transactional(readOnly = true)
+    public MarketSettlementMessage findById(String tradeId) {
+        return marketSettlementMessageRepository.findByTradeId(tradeId)
+                .orElseThrow(() -> new ResourceNotFoundException("MarketSettlementMessage not found with tradeId", tradeId));
+    }
+
     private String transformSupportingInformation(String supportingInformation) {
         if (supportingInformation == null || supportingInformation.isEmpty()) {
             return null;
