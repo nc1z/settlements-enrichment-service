@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface StandardSettlementInstructionRepository extends JpaRepository<StandardSettlementInstruction, Long> {
-    public Optional<StandardSettlementInstruction> findByCode(String code);
+    Optional<StandardSettlementInstruction> findByCode(String code);
 }
