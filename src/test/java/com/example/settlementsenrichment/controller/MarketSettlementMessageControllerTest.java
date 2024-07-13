@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -65,7 +66,7 @@ class MarketSettlementMessageControllerTest {
                 .thenReturn(marketSettlementMessages.get(0)); // Mock the service response
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(validRequest)))
                 .andExpect(status().isCreated());
     }
@@ -77,7 +78,7 @@ class MarketSettlementMessageControllerTest {
                 .thenReturn(message); // Mock the service response
 
         mvc.perform(MockMvcRequestBuilders.get("/api/market-settlement-messages/16846549")
-                        .contentType("application/json"))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.tradeId").value(message.getTradeId()))
                 .andExpect(jsonPath("$.amount").value(message.getAmount().setScale(2, RoundingMode.UNNECESSARY)))
                 .andExpect(jsonPath("$.valueDate").value(message.getValueDate()))
@@ -100,7 +101,7 @@ class MarketSettlementMessageControllerTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidRequest)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.tradeId").value("TradeId cannot be blank"));
@@ -114,7 +115,7 @@ class MarketSettlementMessageControllerTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestWithAlphabetsInTradeId)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.tradeId").value("Trade ID must only contain digits"));
@@ -131,7 +132,7 @@ class MarketSettlementMessageControllerTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidRequest)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.amount").value("Amount cannot be null"));
@@ -145,7 +146,7 @@ class MarketSettlementMessageControllerTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestWithNegativeAmount)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.amount").value("Amount must be greater than zero"));
@@ -159,7 +160,7 @@ class MarketSettlementMessageControllerTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestWithAmount3DecimalPlaces)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.amount").value("Amount must have at most 2 decimal places and 15 integer digits"));
@@ -174,7 +175,7 @@ class MarketSettlementMessageControllerTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestWithInvalidAmount)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.amount").value("Amount must have at most 2 decimal places and 15 integer digits"));
@@ -191,7 +192,7 @@ class MarketSettlementMessageControllerTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidRequest)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.code").value("SSI Code cannot be blank"));
@@ -208,7 +209,7 @@ class MarketSettlementMessageControllerTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidRequest)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.currency").value("Currency cannot be blank"));
@@ -222,7 +223,7 @@ class MarketSettlementMessageControllerTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestWithInvalidCurrency)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.currency").value("Currency must be a valid ISO 4217 code"));
@@ -239,7 +240,7 @@ class MarketSettlementMessageControllerTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidRequest)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.valueDate").value("Value Date cannot be blank"));
@@ -253,7 +254,7 @@ class MarketSettlementMessageControllerTest {
                 .build();
 
         mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
-                        .contentType("application/json")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidDateRequest)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.valueDate").value("Invalid value date, expected format is ddMMyyyy"));
