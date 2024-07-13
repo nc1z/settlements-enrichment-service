@@ -8,6 +8,7 @@ import com.example.settlementsenrichment.exception.ResourceNotFoundException;
 import com.example.settlementsenrichment.repository.MarketSettlementMessageRepository;
 import com.example.settlementsenrichment.repository.StandardSettlementInstructionRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -21,6 +22,7 @@ public class MarketSettlementMessageService {
         this.standardSettlementInstructionRepository = standardSettlementInstructionRepository;
     }
 
+    @Transactional
     public MarketSettlementMessage createMarketSettlementMessage(TradeRequest tradeRequest) throws Exception {
         StandardSettlementInstruction ssi = standardSettlementInstructionRepository.findByCode(tradeRequest.code())
                 .orElseThrow(() -> new ResourceNotFoundException(tradeRequest.code()));
