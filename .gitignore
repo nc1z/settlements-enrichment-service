@@ -7,6 +7,7 @@ target/
 # Exclude all application-{profile} files
 application-*.properties
 application-*.yml
+!application-test.properties
 
 ### STS ###
 .apt_generated
