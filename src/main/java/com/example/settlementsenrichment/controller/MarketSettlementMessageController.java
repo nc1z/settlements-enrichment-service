@@ -3,6 +3,7 @@ package com.example.settlementsenrichment.controller;
 import com.example.settlementsenrichment.dto.TradeRequest;
 import com.example.settlementsenrichment.entity.MarketSettlementMessage;
 import com.example.settlementsenrichment.service.MarketSettlementMessageService;
+import com.example.settlementsenrichment.validator.DigitsOnly;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class MarketSettlementMessageController {
     }
 
     @GetMapping("/{tradeId}")
-    public ResponseEntity<MarketSettlementMessage> getMessageByTradeId(@PathVariable String tradeId) {
+    public ResponseEntity<MarketSettlementMessage> getMessageByTradeId(@PathVariable @DigitsOnly(field = "tradeId") String tradeId) {
         MarketSettlementMessage message = service.findById(tradeId);
         return ResponseEntity.ok(message);
     }

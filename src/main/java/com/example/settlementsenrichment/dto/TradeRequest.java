@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 public record TradeRequest(
         @JsonProperty("TradeId")
         @NotBlank(message = "TradeId cannot be blank")
+        @Pattern(regexp = ValidationConstants.NUMERIC_REGEX, message = "Trade ID must only contain digits")
         String tradeId,
 
         @JsonProperty("SSI Code")
