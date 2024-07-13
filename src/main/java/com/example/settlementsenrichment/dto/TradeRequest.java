@@ -17,8 +17,8 @@ public record TradeRequest(
 
         @JsonProperty("Amount")
         @NotNull(message = "Amount cannot be null")
-        @DecimalMin(value = "0.0", inclusive = false, message = "Amount must be greater than zero")
-        @Digits(integer = 15, fraction = 2, message = "Amount must have exactly 2 decimal places and at most 15 integer digits")
+        @DecimalMin(value = "0.00", inclusive = false, message = "Amount must be greater than zero")
+        @Digits(integer = 15, fraction = 2, message = "Amount must have at most 2 decimal places and 15 integer digits")
         BigDecimal amount,
 
         @JsonProperty("Currency")
