@@ -3,6 +3,7 @@ package com.example.settlementsenrichment.dto;
 import com.example.settlementsenrichment.util.ValidationConstants;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
+import lombok.Builder;
 
 import java.math.BigDecimal;
 
@@ -32,4 +33,7 @@ public record TradeRequest(
         @Pattern(regexp = ValidationConstants.VALUE_DATE_REGEX, message = "Invalid value date, expected format is ddMMyyyy")
         String valueDate
 ) {
+    @Builder
+    public TradeRequest {
+    }
 }
