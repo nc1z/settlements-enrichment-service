@@ -65,7 +65,7 @@ class MarketSettlementMessageControllerTest {
         when(marketSettlementMessageService.createMarketSettlementMessage(validRequest))
                 .thenReturn(marketSettlementMessages.get(0)); // Mock the service response
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(validRequest)))
                 .andExpect(status().isCreated());
@@ -77,7 +77,7 @@ class MarketSettlementMessageControllerTest {
         when(marketSettlementMessageService.findByTradeId("16846549"))
                 .thenReturn(message); // Mock the service response
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/market-settlement-messages/16846549")
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/market-settlement-messages/16846549")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.tradeId").value(message.getTradeId()))
                 .andExpect(jsonPath("$.amount").value(message.getAmount().setScale(2, RoundingMode.UNNECESSARY)))
@@ -100,7 +100,7 @@ class MarketSettlementMessageControllerTest {
                 .valueDate("17032020")
                 .build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidRequest)))
                 .andExpect(status().isBadRequest())
@@ -114,7 +114,7 @@ class MarketSettlementMessageControllerTest {
                 .valueDate("17032020")
                 .build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestWithAlphabetsInTradeId)))
                 .andExpect(status().isBadRequest())
@@ -131,7 +131,7 @@ class MarketSettlementMessageControllerTest {
                 .valueDate("17032020")
                 .build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidRequest)))
                 .andExpect(status().isBadRequest())
@@ -145,7 +145,7 @@ class MarketSettlementMessageControllerTest {
                 .valueDate("17032020")
                 .build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestWithNegativeAmount)))
                 .andExpect(status().isBadRequest())
@@ -159,7 +159,7 @@ class MarketSettlementMessageControllerTest {
                 .valueDate("17032020")
                 .build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestWithAmount3DecimalPlaces)))
                 .andExpect(status().isBadRequest())
@@ -174,7 +174,7 @@ class MarketSettlementMessageControllerTest {
                 .valueDate("17032020")
                 .build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestWithInvalidAmount)))
                 .andExpect(status().isBadRequest())
@@ -191,7 +191,7 @@ class MarketSettlementMessageControllerTest {
                 .valueDate("17032020")
                 .build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidRequest)))
                 .andExpect(status().isBadRequest())
@@ -208,7 +208,7 @@ class MarketSettlementMessageControllerTest {
                 .valueDate("17032020")
                 .build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidRequest)))
                 .andExpect(status().isBadRequest())
@@ -222,7 +222,7 @@ class MarketSettlementMessageControllerTest {
                 .valueDate("17032020")
                 .build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestWithInvalidCurrency)))
                 .andExpect(status().isBadRequest())
@@ -239,7 +239,7 @@ class MarketSettlementMessageControllerTest {
                 .valueDate(null)
                 .build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidRequest)))
                 .andExpect(status().isBadRequest())
@@ -253,7 +253,7 @@ class MarketSettlementMessageControllerTest {
                 .valueDate("32012020")
                 .build();
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(invalidDateRequest)))
                 .andExpect(status().isBadRequest())

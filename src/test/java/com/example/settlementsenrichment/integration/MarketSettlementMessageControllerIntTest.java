@@ -59,7 +59,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestJson))
                 .andExpect(status().isCreated())
@@ -88,7 +88,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestJsonVariant))
                 .andExpect(status().isCreated())
@@ -113,11 +113,11 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(tradeRequestJson));
 
-        mvc.perform(MockMvcRequestBuilders.get("/api/market-settlement-messages/16846548")
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/market-settlement-messages/16846548")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -147,7 +147,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithNoTradeIdJson))
                 .andExpect(status().isBadRequest())
@@ -170,7 +170,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithInvalidTradeIdJson))
                 .andExpect(status().isBadRequest())
@@ -196,12 +196,12 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestJson))
                 .andExpect(status().isCreated());
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestJson))
                 .andExpect(status().isConflict())
@@ -224,7 +224,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithNoSSICodeJson))
                 .andExpect(status().isBadRequest())
@@ -250,7 +250,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithNoSSICodeJson))
                 .andExpect(status().isNotFound())
@@ -273,7 +273,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithNoAmountJson))
                 .andExpect(status().isBadRequest())
@@ -296,7 +296,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithInvalidAmountDecimalsJson))
                 .andExpect(status().isBadRequest())
@@ -319,7 +319,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithInvalidAmountDigitsJson))
                 .andExpect(status().isBadRequest())
@@ -342,7 +342,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithInvalidAmountTypeJson))
                 .andExpect(status().isBadRequest())
@@ -365,7 +365,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithNoCurrencyJson))
                 .andExpect(status().isBadRequest())
@@ -388,7 +388,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithInvalidCurrencyJson))
                 .andExpect(status().isBadRequest())
@@ -411,7 +411,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithInvalidCurrencyTypeJson))
                 .andExpect(status().isBadRequest())
@@ -434,7 +434,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithNoValueDateJson))
                 .andExpect(status().isBadRequest())
@@ -457,7 +457,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithInvalidValueDateJson))
                 .andExpect(status().isBadRequest())
@@ -480,7 +480,7 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
                 }
                 """;
 
-        mvc.perform(MockMvcRequestBuilders.post("/api/market-settlement-messages")
+        mvc.perform(MockMvcRequestBuilders.post("/api/v1/market-settlement-messages")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tradeRequestWithInvalidValueDateTypeJson))
                 .andExpect(status().isBadRequest())

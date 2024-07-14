@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/market-settlement-messages")
+@RequestMapping("/api/v1/market-settlement-messages")
 public class MarketSettlementMessageController {
     private final MarketSettlementMessageService service;
 
