@@ -17,12 +17,16 @@ build:
 run:
 	@echo "Starting the application with Docker Compose..."
 	docker-compose -f $(COMPOSE_FILE) up --build -d settlements-enrichment-service postgres
+	@echo "Removing dangling images..."
+	docker image prune -f
 
 # Run tests
 .PHONY: test
 test: build
 	@echo "Running tests..."
 	docker-compose -f $(COMPOSE_FILE) run --rm tests
+	@echo "Removing dangling images..."
+	docker image prune -f
 
 # Stop the application and remove containers
 .PHONY: stop
