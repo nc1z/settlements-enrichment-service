@@ -78,6 +78,9 @@ Once the containers have started, here are some references for you to explore:
 - Access the API documentation at: `http://localhost:8080/swagger-ui/v1.html`
 - Use the postman collection to test endpoints and make
   requests: `settlements_enrichment_service.postman_collection.json`
+- Run tests - two options
+    - `make test`
+    - `docker-compose -f compose.dev.yaml run --rm tests`
 - Get test coverage report (It has good coverage!):
    ```
    mvn clean test                    
@@ -93,47 +96,3 @@ Once the containers have started, here are some references for you to explore:
   windows, and cloning the repository. Make sure that the line ending of
   the mvnw is LF, when you clone the repository, git for Windows may change the line
   endings to CRLF. This can be resolved by running `git config --global core.autocrlf input` before cloning.
-
-## Additional Resources
-
-#### API docs
-
-`{{url}}/swagger-ui/index.html`
-
-#### Health check endpoint
-
-`{{url}}/actuator/health`
-
-#### Postman collection
-
-`settlements_enrichment_service.postman_collection.json`
-
-## Assumptions & Special Cases
-
-Details on any assumptions made and special cases handled.
-
-## Approach and Design Choices
-
-An overview of the approach and design choices made during development.
-
-## Tests, Validations, Logging, Clean Code...
-
-### Unit Tests and Test Coverage
-
-Information about unit tests, test coverage, and methodologies used.
-
-### Validations
-
-Details on the validations implemented in the application.
-
-### Exception Handling
-
-An overview of how exceptions are handled within the application.
-
-### Logging
-
-Information about logging practices and configurations.
-
-### Clean Code Principles
-
-An explanation of the clean code principles followed during development.
