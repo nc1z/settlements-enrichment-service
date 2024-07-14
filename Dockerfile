@@ -4,12 +4,15 @@ FROM openjdk:17-jdk-slim
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the Maven wrapper scripts and the .mvn directory
+# Copy the Maven wrapper files
 COPY .mvn .mvn
 COPY mvnw .
 COPY mvnw.cmd .
 
-# Copy the project files to the working directory
+# Ensure the mvnw script has executable permissions
+RUN chmod +x mvnw
+
+# Copy the pom.xml file and resolve dependencies
 COPY pom.xml .
 RUN ./mvnw dependency:resolve
 
