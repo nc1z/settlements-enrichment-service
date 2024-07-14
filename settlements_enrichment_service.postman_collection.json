@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "6a5ed808-6c51-49b5-abac-3f1a7a9df0b7",
+		"name": "Settlements Enrichment Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36496484"
+	},
+	"item": [
+		{
+			"name": "getMessageByTradeId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/v1/market-settlement-messages/16846548",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"market-settlement-messages",
+						"16846548"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMessage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"TradeId\": \"16846548\",\n  \"SSI Code\": \"OCBC_DBS_1\", \n  \"Amount\": 12894.65,\n  \"Currency\": \"USD\",\n  \"Value Date\": \"20022020\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/market-settlement-messages",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"market-settlement-messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/actuator/health",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actuator",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/actuator",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"actuator"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
