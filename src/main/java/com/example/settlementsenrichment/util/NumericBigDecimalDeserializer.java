@@ -1,7 +1,6 @@
 package com.example.settlementsenrichment.util;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -13,7 +12,7 @@ public class NumericBigDecimalDeserializer extends JsonDeserializer<BigDecimal> 
 
     @Override
     public BigDecimal deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
-            throws IOException, JsonProcessingException {
+            throws IOException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
         if (!node.isNumber()) {
             String fieldName = jsonParser.currentName();

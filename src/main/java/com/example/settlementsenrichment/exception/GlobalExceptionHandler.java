@@ -1,7 +1,5 @@
 package com.example.settlementsenrichment.exception;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -61,17 +59,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
         String errorMessage = "Malformed JSON request";
         Throwable cause = ex.getCause();
-        if (cause instanceof InvalidFormatException) {
-            InvalidFormatException ife = (InvalidFormatException) cause;
-            String fieldName = ife.getPath().stream()
-                    .map(JsonMappingException.Reference::getFieldName)
-                    .findFirst()
-                    .orElse("unknown");
-            errorMessage = String.format("Invalid type for field '%s'", fieldName);
-        } else if (cause instanceof IOException) {
+        if (cause instanceof IOException) {
             errorMessage = cause.getMessage();
         }
-
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), errorMessage);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
