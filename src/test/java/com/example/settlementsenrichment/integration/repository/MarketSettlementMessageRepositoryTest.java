@@ -1,8 +1,9 @@
-package com.example.settlementsenrichment.repository;
+package com.example.settlementsenrichment.integration.repository;
 
 import com.example.settlementsenrichment.AbstractDataJpaTest;
 import com.example.settlementsenrichment.entity.MarketSettlementMessage;
 import com.example.settlementsenrichment.entity.Party;
+import com.example.settlementsenrichment.repository.MarketSettlementMessageRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
