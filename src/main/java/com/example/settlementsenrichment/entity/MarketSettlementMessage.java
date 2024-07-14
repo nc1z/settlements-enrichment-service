@@ -4,6 +4,8 @@ import com.example.settlementsenrichment.util.ValidationConstants;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -27,11 +29,14 @@ public class MarketSettlementMessage {
     private UUID messageId;
 
     @NotNull(message = "Trade ID cannot be null")
+    @Pattern(regexp = ValidationConstants.NUMERIC_REGEX, message = "Trade ID must only contain digits")
     @Column(name = "trade_id", nullable = false, unique = true)
     @Schema(type = "String", example = "16846548")
     private String tradeId;
 
     @NotNull(message = "Amount cannot be null")
+    @DecimalMin(value = "0.00", inclusive = false, message = "Amount must be greater than zero")
+    @Digits(integer = 15, fraction = 2, message = "Amount must have at most 2 decimal places and 15 integer digits")
     @Column(name = "amount", nullable = false)
     @Schema(type = "BigDecimal", example = "12894.65")
     private BigDecimal amount;
@@ -43,6 +48,7 @@ public class MarketSettlementMessage {
     private String valueDate;
 
     @NotNull(message = "Currency cannot be null")
+    @Pattern(regexp = ValidationConstants.ISO4217_CURRENCY_CODE_REGEX, message = "Currency must be a valid ISO 4217 code")
     @Column(name = "currency", nullable = false)
     @Schema(type = "String", example = "USD")
     private String currency;
