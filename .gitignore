@@ -8,6 +8,8 @@ target/
 application-*.properties
 application-*.yml
 !application-test.properties
+# Usually ignored but now used for local testing purposes for the project:
+!application-dev.properties
 
 ### STS ###
 .apt_generated
