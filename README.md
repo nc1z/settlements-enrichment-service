@@ -14,11 +14,7 @@ For more information on these, please refer to the `/docs` folder
 1. Approaches and assumptions
 2. Design choices
 3. Testing approaches and coverage
-4. Validations
-5. Exception handling
-6. Logging
-7. Clean code principles
-8. Additional resources
+4. Others (Validations, Exception handling, Logging, Coding Practices)
 
 ## Getting Started
 
