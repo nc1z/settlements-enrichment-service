@@ -137,6 +137,19 @@ public class MarketSettlementMessageControllerIntTest extends AbstractIntegratio
     }
 
     @Test
+    void shouldReturnNotFoundForTradeIdThatDoesNotExist() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/market-settlement-messages/777777")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(result -> {
+                    String jsonResponse = result.getResponse().getContentAsString();
+                    ErrorResponse errorResponse = objectMapper.readValue(jsonResponse, ErrorResponse.class);
+                    assertEquals("MarketSettlementMessage not found with tradeId: 777777", errorResponse.getMessage());
+                });
+    }
+
+    @Test
     void shouldReturnBadRequestForInvalidTradeId() throws Exception {
         String tradeRequestWithNoTradeIdJson = """
                 {

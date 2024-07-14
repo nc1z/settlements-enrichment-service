@@ -20,8 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(MarketSettlementMessageController.class)
 class MarketSettlementMessageControllerTest {
@@ -119,6 +118,20 @@ class MarketSettlementMessageControllerTest {
                         .content(objectMapper.writeValueAsString(requestWithAlphabetsInTradeId)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.tradeId").value("Trade ID must only contain digits"));
+    }
+
+    @Test
+    void shouldReturnBadRequestForInvalidTradeIdParams() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/market-settlement-messages/invalid_trade_id")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message").value("Validation error"))
+                .andExpect(jsonPath("$.errors['Invalid parameter']").value("tradeId must contain only digits"));
+
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/market-settlement-messages/")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 
     @Test
