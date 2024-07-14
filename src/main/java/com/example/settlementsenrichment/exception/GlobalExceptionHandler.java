@@ -20,15 +20,8 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductNotFoundException(ResourceNotFoundException ex) {
-        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage()) {
-        };
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-    }
-
-    @ExceptionHandler(NoResourceFoundException.class)
-    public ResponseEntity<ErrorResponse> handleProductNotFoundException(NoResourceFoundException ex) {
+    @ExceptionHandler({ResourceNotFoundException.class, NoResourceFoundException.class})
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(ResourceNotFoundException ex) {
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage()) {
         };
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
