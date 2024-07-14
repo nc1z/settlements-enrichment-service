@@ -139,4 +139,12 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>docker-build</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+        </profile>
+    </profiles>
 </project>

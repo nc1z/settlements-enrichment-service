@@ -1,0 +1,53 @@
+networks:
+  testcontainers-network:
+    driver: bridge
+
+services:
+  postgres:
+    image: 'postgres:14'
+    environment:
+      - 'POSTGRES_DB=ses_db'
+      - 'POSTGRES_PASSWORD=admin'
+      - 'POSTGRES_USER=admin'
+    ports:
+      - '5432:5432'
+    networks:
+      - testcontainers-network
+
+  settlements-enrichment-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: settlements-enrichment-service
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/ses_db
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8080:8080"
+    networks:
+      - testcontainers-network
+
+  tests:
+    image: maven:3
+    stop_signal: SIGKILL
+    stdin_open: true
+    tty: true
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Maven cache (optional)
+      - ~/.m2:/root/.m2
+    command: mvn test
+    environment:
+      - SPRING_PROFILES_ACTIVE=test
+      - TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal
+    networks:
+      - testcontainers-network
