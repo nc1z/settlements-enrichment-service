@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:20.10.8
+        options: --privileged
+    env:
+      POSTGRES_DB: ses_db
+      POSTGRES_PORT: 5432
+      SERVER_PORT: 8080
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set environment variables
+        run: |
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> $GITHUB_ENV
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> $GITHUB_ENV
+          echo "SPRING_DATASOURCE_USERNAME=${{ secrets.SPRING_DATASOURCE_USERNAME }}" >> $GITHUB_ENV
+          echo "SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }}" >> $GITHUB_ENV
+
+      - name: Build Docker image
+        run: docker-compose -f compose.dev.yaml build
+
+      - name: Run Docker Compose for tests
+        run: docker-compose -f compose.dev.yaml up --build -d postgres settlements-enrichment-service
+
+      - name: Run tests
+        run: docker-compose -f compose.dev.yaml run --rm tests
+
+      - name: Stop Docker Compose services
+        run: docker-compose -f compose.dev.yaml down
+
+      - name: Remove dangling images
+        run: docker image prune -f
