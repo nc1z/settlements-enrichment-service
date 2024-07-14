@@ -18,12 +18,14 @@ public class MarketSettlementMessageController {
         this.service = service;
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ResponseEntity<MarketSettlementMessage> createMessage(@Valid @RequestBody TradeRequest tradeRequest) {
         MarketSettlementMessage message = service.createMarketSettlementMessage(tradeRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(message);
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{tradeId}")
     public ResponseEntity<MarketSettlementMessage> getMessageByTradeId(@PathVariable @DigitsOnly(field = "tradeId") String tradeId) {
         MarketSettlementMessage message = service.findByTradeId(tradeId);
