@@ -40,3 +40,6 @@ build/
 ### logs
 *.log
 *.log.*
+
+### secrets
+.env

@@ -1,5 +1,10 @@
 IMAGE_NAME=settlements-enrichment-service
 COMPOSE_FILE=compose.dev.yaml
+ENV_FILE=.env
+
+# Load environment variables from the .env file
+include $(ENV_FILE)
+export $(shell sed 's/=.*//' $(ENV_FILE))
 
 # Build the Docker image
 .PHONY: build
@@ -11,7 +16,7 @@ build:
 .PHONY: run
 run:
 	@echo "Starting the application with Docker Compose..."
-	docker-compose -f $(COMPOSE_FILE) up --build -d
+	docker-compose -f $(COMPOSE_FILE) up --build -d settlements-enrichment-service postgres
 
 # Run tests
 .PHONY: test
