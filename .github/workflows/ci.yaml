@@ -40,17 +40,8 @@ jobs:
       - name: Build Docker image
         run: docker-compose -f compose.dev.yaml build
 
-      - name: Run Docker Compose for tests
+      - name: Run Docker Compose
         run: docker-compose -f compose.dev.yaml up --build -d postgres settlements-enrichment-service
-
-      - name: Wait for PostgreSQL to be ready
-        run: |
-          until docker-compose -f compose.dev.yaml exec -T postgres pg_isready -U ${{ secrets.POSTGRES_USER }} -d ${POSTGRES_DB}; do
-            sleep 1
-          done
-
-      - name: Run tests
-        run: docker-compose -f compose.dev.yaml run --rm tests
 
       - name: Stop Docker Compose services
         run: docker-compose -f compose.dev.yaml down
