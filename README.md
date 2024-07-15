@@ -3,13 +3,13 @@
 A SpringBoot REST server that receives trade requests, performs enrichment using SSI reference data, and returns market
 settlement messages.
 
-Made by Neil over the weekend :smile:
+Made by Neil :smile:
 
 ## Before we start...
 
 This `README.md` consists of the instructions to get the application up and running.
 
-For more information on these, please refer to the `/docs` folder
+For more information on the below topics, please refer to the `/docs` folder:
 
 1. Approaches and assumptions
 2. Design choices
@@ -74,9 +74,10 @@ Once the containers have started, here are some references for you to explore:
 - Access the API documentation at: `http://localhost:8080/swagger-ui/v1.html`
 - Use the postman collection to test endpoints and make
   requests: `settlements_enrichment_service.postman_collection.json`
-- Run tests - two options
+- Run tests - 3 options
     - `make test`
     - `docker-compose -f compose.dev.yaml run --rm tests`
+    - Run it locally via the IDE (e.g. IntelliJ)
 - Get test coverage report (It has good coverage!):
    ```
    mvn clean test                    
