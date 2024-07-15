@@ -52,7 +52,7 @@ on your machine:
     ```bash
    docker-compose -f compose.dev.yaml up --build -d settlements-enrichment-service postgres
    ```
-3. Once the containers are up and running, refer to `Using the service` section.
+3. Once the containers are up and running, refer to `Using the service` section below.
 
 ### B. Running the application locally
 
@@ -84,6 +84,30 @@ Once the containers have started, here are some references for you to explore:
    mvn jacoco:report
   ```
   View coverage report in browser: `http://localhost:63342/settlements-enrichment-service/target/site/jacoco/index.html`
+
+### Quick Start
+
+Once the server starts, execute the below commands to test the application out
+
+`GET`
+
+```cURL
+curl -X GET "http://localhost:8080/api/v1/market-settlement-messages/16846548" -H "Content-Type: application/json"
+```
+
+`CREATE`
+
+```cURL
+curl --location 'localhost:8080/api/v1/market-settlement-messages' \
+--header 'Content-Type: application/json' \
+--data '{
+  "TradeId": "16846548",
+  "SSI Code": "OCBC_DBS_1",
+  "Amount": 12894.65,
+  "Currency": "USD",
+  "Value Date": "20022020"
+}'
+```
 
 ### Debugging
 
