@@ -1,5 +1,6 @@
 package com.example.settlementsenrichment.exception;
 
+import org.hibernate.exception.LockAcquisitionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -64,6 +65,15 @@ public class GlobalExceptionHandler {
         }
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), errorMessage);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(LockAcquisitionException.class)
+    public ResponseEntity<ErrorResponse> handleLockAcquisitionException(LockAcquisitionException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("detail", "Database lock acquisition failure");
+
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.CONFLICT.value(), "Database conflict error", errors);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
     @ExceptionHandler(Exception.class)

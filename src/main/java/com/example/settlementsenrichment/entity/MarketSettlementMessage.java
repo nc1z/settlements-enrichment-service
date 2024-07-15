@@ -1,6 +1,7 @@
 package com.example.settlementsenrichment.entity;
 
 import com.example.settlementsenrichment.util.ValidationConstants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -72,4 +73,8 @@ public class MarketSettlementMessage {
     @Column(name = "supporting_information")
     @Schema(type = "String", example = "/BNF/FFC-4697132")
     private String supportingInformation;
+
+    @Version
+    @JsonIgnore
+    private Integer version;
 }

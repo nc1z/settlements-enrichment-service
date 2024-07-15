@@ -1,4 +1,4 @@
-package com.example.settlementsenrichment.service;
+package com.example.settlementsenrichment.unit.service;
 
 import com.example.settlementsenrichment.dto.TradeRequest;
 import com.example.settlementsenrichment.entity.MarketSettlementMessage;
@@ -8,6 +8,7 @@ import com.example.settlementsenrichment.exception.DuplicateResourceException;
 import com.example.settlementsenrichment.exception.ResourceNotFoundException;
 import com.example.settlementsenrichment.repository.MarketSettlementMessageRepository;
 import com.example.settlementsenrichment.repository.StandardSettlementInstructionRepository;
+import com.example.settlementsenrichment.service.MarketSettlementMessageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

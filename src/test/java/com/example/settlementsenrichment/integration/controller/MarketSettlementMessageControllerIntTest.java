@@ -1,4 +1,4 @@
-package com.example.settlementsenrichment.integration;
+package com.example.settlementsenrichment.integration.controller;
 
 import com.example.settlementsenrichment.AbstractIntegrationTest;
 import com.example.settlementsenrichment.entity.MarketSettlementMessage;

@@ -1,5 +1,6 @@
-package com.example.settlementsenrichment.controller;
+package com.example.settlementsenrichment.unit.controller;
 
+import com.example.settlementsenrichment.controller.MarketSettlementMessageController;
 import com.example.settlementsenrichment.dto.TradeRequest;
 import com.example.settlementsenrichment.entity.MarketSettlementMessage;
 import com.example.settlementsenrichment.entity.Party;
