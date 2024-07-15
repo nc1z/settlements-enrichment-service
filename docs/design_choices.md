@@ -51,3 +51,10 @@ instead as the Primary Key (PK)
 **MarketSettlementMessage**
 
 Decided to use the auto generated UUID `messageId` as the PK.
+
+## Handling Concurrency for CREATE
+
+Handled this using the strictest Isolation level of `SERIALIZABLE`, which prevents dirty reads, non-repeatable reads or
+phantom reads.
+
+Optimistic locking on MarketSettlementMessage entity with version

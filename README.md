@@ -93,3 +93,7 @@ Once the containers have started, here are some references for you to explore:
   windows, and cloning the repository. Make sure that the line ending of
   the mvnw is LF, when you clone the repository, git for Windows may change the line
   endings to CRLF. This can be resolved by running `git config --global core.autocrlf input` before cloning.
+
+`Docker commands are stuck during execution`
+
+- Restart docker

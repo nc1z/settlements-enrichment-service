@@ -4,7 +4,7 @@
 
 With the time constraint, I did not choose to use Test Driven Development (TDD) in the creation of this project.
 
-This was my priorities during my scoping of the effort + time:
+These were my priorities during my scoping of the effort + time:
 
 1. Service Unit Tests
     - These unit tests are the most important, as they cover the core purpose and business logic of our application.
